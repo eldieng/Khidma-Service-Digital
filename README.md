@@ -95,8 +95,7 @@ src/
 
 - 🌐 Website : [https://elhadji-dieng.com](https://elhadji-dieng.com)
 - 📧 Email : [el.elhadji.dieng@gmail.com](mailto:el.elhadji.dieng@gmail.com)
-- � Email : [seckrama098@gmail.com](mailto:seckrama098@gmail.com)
-- �📱 Téléphone : +221 77 454 86 61
+-  Téléphone : +221 77 454 86 61
 - 📍 Localisation : Dakar, Parcelle Assainie U8, Sénégal
 
 ## 🏢 Client
