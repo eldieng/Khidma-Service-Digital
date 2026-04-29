@@ -1,0 +1,197 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ============================================
+// SERVICES
+// ============================================
+model Service {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  title           String
+  description     String
+  longDescription String   @db.Text
+  icon            String
+  color           String
+  image           String
+  order           Int      @default(0)
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  benefits    ServiceBenefit[]
+  subServices SubService[]
+  processSteps ProcessStep[]
+}
+
+model ServiceBenefit {
+  id        String  @id @default(cuid())
+  text      String
+  order     Int     @default(0)
+  serviceId String
+  service   Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+}
+
+model SubService {
+  id          String  @id @default(cuid())
+  name        String
+  description String
+  order       Int     @default(0)
+  serviceId   String
+  service     Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+}
+
+model ProcessStep {
+  id          String  @id @default(cuid())
+  step        Int
+  title       String
+  description String
+  serviceId   String
+  service     Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+}
+
+// ============================================
+// PROJECTS (Réalisations)
+// ============================================
+model Project {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  title           String
+  category        String
+  description     String
+  fullDescription String   @db.Text
+  client          String
+  date            String
+  image           String
+  order           Int      @default(0)
+  isActive        Boolean  @default(true)
+  isFeatured      Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  technologies ProjectTechnology[]
+  gallery      ProjectGallery[]
+  challenges   ProjectChallenge[]
+  solutions    ProjectSolution[]
+  results      ProjectResult[]
+}
+
+model ProjectTechnology {
+  id        String  @id @default(cuid())
+  name      String
+  order     Int     @default(0)
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model ProjectGallery {
+  id        String  @id @default(cuid())
+  url       String
+  alt       String?
+  order     Int     @default(0)
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model ProjectChallenge {
+  id        String  @id @default(cuid())
+  text      String
+  order     Int     @default(0)
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model ProjectSolution {
+  id        String  @id @default(cuid())
+  text      String
+  order     Int     @default(0)
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model ProjectResult {
+  id        String  @id @default(cuid())
+  text      String
+  order     Int     @default(0)
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+// ============================================
+// BLOG (Articles)
+// ============================================
+model Article {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  title     String
+  excerpt   String
+  content   String   @db.Text
+  image     String
+  category  String
+  author    String
+  readTime  String
+  isActive  Boolean  @default(true)
+  isFeatured Boolean @default(false)
+  publishedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================
+// USERS (Tous les utilisateurs)
+// ============================================
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  password      String
+  name          String
+  phone         String?
+  company       String?
+  avatar        String?
+  role          String   @default("user") // user, admin
+  isActive      Boolean  @default(true)
+  emailVerified Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  quoteRequests QuoteRequest[]
+}
+
+// ============================================
+// DEMANDES DE DEVIS
+// ============================================
+model QuoteRequest {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  phone       String
+  company     String?
+  service     String
+  budget      String?
+  deadline    String?
+  description String   @db.Text
+  status      String   @default("pending") // pending, in_progress, completed, cancelled
+  notes       String?  @db.Text
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ============================================
+// PARAMÈTRES DU SITE
+// ============================================
+model SiteSettings {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       String   @db.Text
+  description String?
+  updatedAt   DateTime @updatedAt
+}

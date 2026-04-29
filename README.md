@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Khidma Service Digital
 
-## Getting Started
+![KSD Logo](public/logo.png)
 
-First, run the development server:
+Site web vitrine moderne pour **Khidma Service Digital**, une agence digitale basée au Sénégal spécialisée dans la communication digitale, le développement web, le design graphique et l'automatisation.
+
+## 🚀 Fonctionnalités
+
+- **Site vitrine** : Présentation des services, réalisations et articles de blog
+- **Demande de devis** : Formulaire de demande de devis en ligne
+- **Back-office** : Administration complète du contenu (services, projets, articles)
+- **Authentification** : Système de connexion/inscription utilisateur
+- **Mode sombre/clair** : Thème adaptatif
+- **Responsive** : Design optimisé pour tous les appareils
+
+## 🛠️ Stack Technique
+
+| Technologie | Description |
+|-------------|-------------|
+| **Next.js 14** | Framework React avec App Router |
+| **TypeScript** | Typage statique |
+| **TailwindCSS** | Styling utilitaire |
+| **Prisma** | ORM pour PostgreSQL |
+| **shadcn/ui** | Composants UI |
+| **Framer Motion** | Animations |
+
+## 📦 Installation
 
 ```bash
+# Cloner le repository
+git clone https://github.com/eldieng/Khidma-Service-Digital.git
+cd Khidma-Service-Digital
+
+# Installer les dépendances
+npm install
+
+# Configurer les variables d'environnement
+cp .env.example .env
+# Éditer .env avec vos valeurs
+
+# Générer le client Prisma
+npx prisma generate
+
+# Lancer les migrations
+npx prisma migrate dev
+
+# Seed de la base de données (optionnel)
+npx prisma db seed
+
+# Lancer le serveur de développement
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrir [http://localhost:3000](http://localhost:3000) dans votre navigateur.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔧 Variables d'Environnement
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Créer un fichier `.env` à la racine :
 
-## Learn More
+```env
+DATABASE_URL="postgresql://user:password@localhost:5432/ksd"
+AUTH_SECRET="votre_secret_de_32_caracteres_minimum"
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 📁 Structure du Projet
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+├── app/                    # Pages et routes (App Router)
+│   ├── admin/             # Back-office administration
+│   ├── api/               # Routes API REST
+│   └── [pages]/           # Pages publiques
+├── components/            # Composants React réutilisables
+│   ├── layout/           # Header, Footer
+│   ├── sections/         # Sections de pages
+│   └── ui/               # Composants UI (shadcn)
+├── lib/                   # Utilitaires et configurations
+└── styles/               # Styles globaux
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🌐 Pages Principales
 
-## Deploy on Vercel
+- `/` - Accueil
+- `/a-propos` - À propos de l'entreprise
+- `/services` - Liste des services
+- `/realisations` - Portfolio des projets
+- `/blog` - Articles et actualités
+- `/contact` - Formulaire de contact
+- `/demande-devis` - Demande de devis
+- `/admin` - Back-office (authentification requise)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 👤 Auteur
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**El Hadji Dieng**
+
+- 🌐 Website : [https://elhadji-dieng.com](https://elhadji-dieng.com)
+- 📧 Email : [el.elhadji.dieng@gmail.com](mailto:el.elhadji.dieng@gmail.com)
+- 📱 Téléphone : +221 77 454 86 61
+- 📍 Localisation : Dakar, Parcelle Assainie U8, Sénégal
+
+## 🏢 Client
+
+**Khidma Service Digital**
+
+- 🌐 Website : [www.khidmaservice.com](https://www.khidmaservice.com)
+- 📧 Email : contact@khidmaservice.com
+- 📍 Bureaux : Dakar & Louga, Sénégal
+
+## 📄 Licence
+
+Ce projet est sous licence privée. Tous droits réservés © 2026 Khidma Service Digital.

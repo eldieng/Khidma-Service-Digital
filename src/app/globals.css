@@ -1,26 +1,84 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* KSD Brand Colors */
+  --ksd-blue: #1E3A5F;
+  --ksd-blue-dark: #152A45;
+  --ksd-blue-light: #2A4A73;
+  --ksd-orange: #F97316;
+  --ksd-orange-dark: #EA580C;
+  --ksd-orange-light: #FB923C;
+  
+  /* Light Mode */
+  --background: #FFFFFF;
+  --background-secondary: #F8FAFC;
+  --foreground: #1E3A5F;
+  --foreground-secondary: #64748B;
+  --border: #E2E8F0;
+  --accent: #F97316;
+}
+
+.dark {
+  /* Dark Mode */
+  --background: #0F172A;
+  --background-secondary: #1E293B;
+  --foreground: #F8FAFC;
+  --foreground-secondary: #94A3B8;
+  --border: #334155;
+  --accent: #F97316;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
   --color-foreground: var(--foreground);
+  --color-foreground-secondary: var(--foreground-secondary);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  
+  --color-ksd-blue: var(--ksd-blue);
+  --color-ksd-blue-dark: var(--ksd-blue-dark);
+  --color-ksd-blue-light: var(--ksd-blue-light);
+  --color-ksd-orange: var(--ksd-orange);
+  --color-ksd-orange-dark: var(--ksd-orange-dark);
+  --color-ksd-orange-light: var(--ksd-orange-light);
+  
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection color */
+::selection {
+  background-color: var(--ksd-orange);
+  color: white;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ksd-blue-light);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ksd-blue);
 }
