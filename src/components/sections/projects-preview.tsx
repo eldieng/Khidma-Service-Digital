@@ -1,38 +1,40 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-const projects = [
-  {
-    title: "E-commerce Mode",
-    category: "Développement Web",
-    description: "Plateforme e-commerce complète pour une marque de mode sénégalaise.",
-    image: "/projects/project-1.jpg",
-    href: "/realisations/ecommerce-mode",
-    tags: ["Next.js", "Stripe", "TailwindCSS"],
-  },
-  {
-    title: "App Gestion RH",
-    category: "Application Web",
-    description: "Solution de gestion des ressources humaines pour une PME.",
-    image: "/projects/project-2.jpg",
-    href: "/realisations/app-gestion-rh",
-    tags: ["React", "Node.js", "PostgreSQL"],
-  },
-  {
-    title: "Campagne Social Media",
-    category: "Communication Digitale",
-    description: "Stratégie et création de contenu pour le lancement d'un produit.",
-    image: "/projects/project-3.jpg",
-    href: "/realisations/campagne-social",
-    tags: ["Instagram", "Facebook", "TikTok"],
-  },
-];
+interface ProjectPreviewData {
+  id: string;
+  slug: string;
+  title: string;
+  category: string;
+  description: string;
+  technologies?: { id: string; name: string }[];
+}
 
 export function ProjectsPreview() {
+  const [projects, setProjects] = useState<ProjectPreviewData[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchProjects() {
+      try {
+        const res = await fetch("/api/projects");
+        if (!res.ok) return;
+        const data = (await res.json()) as ProjectPreviewData[];
+        setProjects(data.slice(0, 3));
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchProjects();
+  }, []);
+
   return (
     <section className="py-24 bg-background-secondary">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -65,15 +67,35 @@ export function ProjectsPreview() {
 
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+          {loading
+            ? Array.from({ length: 3 }).map((_, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <div className="rounded-2xl bg-background border border-border overflow-hidden">
+                    <div className="aspect-[4/3] bg-foreground/5" />
+                    <div className="p-6 space-y-3">
+                      <div className="h-4 w-24 bg-foreground/10 rounded" />
+                      <div className="h-6 w-3/4 bg-foreground/10 rounded" />
+                      <div className="h-4 w-full bg-foreground/10 rounded" />
+                      <div className="h-4 w-2/3 bg-foreground/10 rounded" />
+                    </div>
+                  </div>
+                </motion.div>
+              ))
+            : projects.map((project, index) => (
             <motion.div
-              key={index}
+              key={project.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
             >
-              <Link href={project.href} className="group block">
+              <Link href={`/realisations/${project.slug}`} className="group block">
                 <div className="relative overflow-hidden rounded-2xl bg-background border border-border hover:border-ksd-orange/50 transition-all duration-300 hover:shadow-xl">
                   {/* Image Placeholder */}
                   <div className="aspect-[4/3] bg-gradient-to-br from-ksd-blue/20 to-ksd-orange/20 relative overflow-hidden">
@@ -102,12 +124,12 @@ export function ProjectsPreview() {
                     
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag, tagIndex) => (
+                      {(project.technologies ?? []).slice(0, 3).map((tech) => (
                         <span
-                          key={tagIndex}
+                          key={tech.id}
                           className="px-3 py-1 bg-background-secondary rounded-full text-xs font-medium text-foreground-secondary"
                         >
-                          {tag}
+                          {tech.name}
                         </span>
                       ))}
                     </div>
