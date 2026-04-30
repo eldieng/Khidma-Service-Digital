@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
     
     // Convertir en objet clé-valeur
     const settingsObject: Record<string, string> = {};
-    settings.forEach((s) => {
+    settings.forEach((s: { key: string; value: string }) => {
       settingsObject[s.key] = s.value;
     });
 
