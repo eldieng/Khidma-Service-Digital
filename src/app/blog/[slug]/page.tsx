@@ -14,7 +14,7 @@ export async function generateStaticParams() {
     where: { isActive: true },
     select: { slug: true },
   });
-  return articles.map((a) => ({ slug: a.slug }));
+  return articles.map((a: { slug: string }) => ({ slug: a.slug }));
 }
 
 export async function generateMetadata({
