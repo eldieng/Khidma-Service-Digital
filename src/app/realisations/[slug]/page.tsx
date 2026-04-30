@@ -132,7 +132,7 @@ export default async function ProjectDetailPage({
 
             {/* Tech Stack */}
             <div className="flex flex-wrap gap-2">
-              {project.technologies.map((tech) => (
+              {project.technologies.map((tech: { id: string; name: string }) => (
                 <span
                   key={tech.id}
                   className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium text-white border border-white/10"
@@ -173,7 +173,7 @@ export default async function ProjectDetailPage({
               </div>
               <h3 className="text-2xl font-bold mb-8 mt-4 ml-8">Défis rencontrés</h3>
               <ul className="space-y-5">
-                {project.challenges.map((challenge, index) => (
+                {project.challenges.map((challenge: { id: string; text: string }, index: number) => (
                   <li 
                     key={challenge.id} 
                     className="flex items-start gap-4 p-4 bg-background/50 rounded-2xl"
@@ -196,7 +196,7 @@ export default async function ProjectDetailPage({
               </div>
               <h3 className="text-2xl font-bold mb-8 mt-4 mr-8">Solutions apportées</h3>
               <ul className="space-y-5">
-                {project.solutions.map((solution, index) => (
+                {project.solutions.map((solution: { id: string; text: string }, index: number) => (
                   <li 
                     key={solution.id}
                     className="flex items-start gap-4 p-4 bg-background/50 rounded-2xl"
@@ -222,7 +222,7 @@ export default async function ProjectDetailPage({
           </div>
 
           <div className="grid sm:grid-cols-3 gap-8">
-            {project.results.map((result) => (
+            {project.results.map((result: { id: string; text: string }) => (
               <div
                 key={result.id}
                 className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center"
