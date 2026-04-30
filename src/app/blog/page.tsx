@@ -101,7 +101,7 @@ export default async function BlogPage() {
 
           {/* Other Articles */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {others.map((article) => (
+            {others.map((article: typeof articles[number]) => (
               <div key={article.id}>
                 <Link href={`/blog/${article.slug}`} className="group block h-full">
                   <div className="h-full bg-background rounded-2xl overflow-hidden border border-border hover:border-ksd-orange/50 transition-all hover:shadow-lg">
