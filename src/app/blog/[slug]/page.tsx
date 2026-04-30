@@ -121,7 +121,7 @@ export default async function ArticleDetailPage({
           <div className="max-w-3xl mx-auto">
             {/* Article Content */}
             <article className="prose prose-lg dark:prose-invert max-w-none">
-              {contentBlocks.map((paragraph, index) => {
+              {contentBlocks.map((paragraph: string, index: number) => {
                 if (paragraph.startsWith("## ")) {
                   return (
                     <h2 
