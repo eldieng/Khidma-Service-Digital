@@ -39,8 +39,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Retourner les infos utilisateur (sans le mot de passe)
-    const userWithoutPassword = { ...user };
-    delete userWithoutPassword.password;
+    const { password: _, ...userWithoutPassword } = user;
 
     const token = createAuthToken({
       userId: user.id,
