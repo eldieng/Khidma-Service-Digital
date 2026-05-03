@@ -34,8 +34,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Khidma Service Digital" }],
   icons: {
-    icon: "/favicon.png",
-    apple: "/favicon.png",
+    icon: "/images/Favicon_khidma_services.png",
+    shortcut: "/images/Favicon_khidma_services.png",
+    apple: "/images/Favicon_khidma_services.png",
   },
   openGraph: {
     type: "website",
