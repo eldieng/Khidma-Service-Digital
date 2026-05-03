@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { ArrowLeft, Save, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ImageUpload } from "@/components/admin/image-upload";
 import Link from "next/link";
 
 interface ServiceData {
@@ -176,15 +177,12 @@ export default function EditServicePage() {
           </div>
         </div>
 
-        <div>
-          <label className="block text-sm font-medium mb-2">Image URL</label>
-          <input
-            type="text"
-            value={formData.image}
-            onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
-          />
-        </div>
+        <ImageUpload
+          label="Image du service"
+          value={formData.image}
+          onChange={(url) => setFormData({ ...formData, image: url })}
+          folder="services"
+        />
 
         <div className="flex justify-end gap-4">
           <Link href="/admin/services">
