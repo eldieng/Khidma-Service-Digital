@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 interface ProjectPreviewData {
@@ -12,6 +13,7 @@ interface ProjectPreviewData {
   title: string;
   category: string;
   description: string;
+  image: string;
   technologies?: { id: string; name: string }[];
 }
 
@@ -97,13 +99,14 @@ export function ProjectsPreview() {
             >
               <Link href={`/realisations/${project.slug}`} className="group block">
                 <div className="relative overflow-hidden rounded-2xl bg-background border border-border hover:border-ksd-orange/50 transition-all duration-300 hover:shadow-xl">
-                  {/* Image Placeholder */}
-                  <div className="aspect-[4/3] bg-gradient-to-br from-ksd-blue/20 to-ksd-orange/20 relative overflow-hidden">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-6xl font-bold text-ksd-blue/10">
-                        {index + 1}
-                      </div>
-                    </div>
+                  {/* Project Image */}
+                  <div className="aspect-[4/3] relative overflow-hidden">
+                    <Image
+                      src={project.image || "/images/placeholder.jpg"}
+                      alt={project.title}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
                     {/* Overlay */}
                     <div className="absolute inset-0 bg-ksd-blue/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                       <ExternalLink className="w-10 h-10 text-white" />
