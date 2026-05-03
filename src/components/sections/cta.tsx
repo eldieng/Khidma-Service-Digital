@@ -7,11 +7,11 @@ import { Button } from "@/components/ui/button";
 
 export function CTA() {
   return (
-    <section className="py-24 bg-background relative overflow-hidden">
+    <section className="py-16 sm:py-24 bg-background relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-ksd-orange/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-ksd-blue/10 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-48 h-48 sm:w-96 sm:h-96 bg-ksd-orange/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-48 h-48 sm:w-96 sm:h-96 bg-ksd-blue/10 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -22,14 +22,14 @@ export function CTA() {
           transition={{ duration: 0.5 }}
           className="max-w-4xl mx-auto text-center"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
             Prêt à{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-ksd-blue to-ksd-orange">
               transformer
             </span>{" "}
             votre business ?
           </h2>
-          <p className="text-foreground-secondary text-lg mb-10 max-w-2xl mx-auto">
+          <p className="text-foreground-secondary text-base sm:text-lg mb-8 sm:mb-10 max-w-2xl mx-auto px-2">
             Discutons de votre projet et découvrez comment KSD peut vous aider à
             atteindre vos objectifs digitaux.
           </p>

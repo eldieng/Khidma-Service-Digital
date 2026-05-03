@@ -60,7 +60,7 @@ const itemVariants = {
 
 export function ServicesPreview() {
   return (
-    <section className="py-24 bg-background-secondary">
+    <section className="py-16 sm:py-24 bg-background-secondary">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -68,18 +68,18 @@ export function ServicesPreview() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-3xl mx-auto mb-10 sm:mb-16 px-2"
         >
           <span className="text-ksd-orange font-semibold text-sm uppercase tracking-wider">
             Nos Services
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-4 mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mt-3 sm:mt-4 mb-4 sm:mb-6">
             Des solutions digitales{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-ksd-blue to-ksd-orange">
               complètes
             </span>
           </h2>
-          <p className="text-foreground-secondary text-lg">
+          <p className="text-foreground-secondary text-base sm:text-lg">
             De la stratégie à l&apos;exécution, nous vous accompagnons dans tous
             les aspects de votre transformation digitale.
           </p>
@@ -91,24 +91,24 @@ export function ServicesPreview() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
         >
           {services.map((service, index) => (
             <motion.div key={index} variants={itemVariants}>
               <Link href={service.href} className="group block h-full">
-                <div className="relative h-full p-6 bg-background rounded-2xl border border-border hover:border-ksd-orange/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                <div className="relative h-full p-4 sm:p-6 bg-background rounded-2xl border border-border hover:border-ksd-orange/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                   {/* Icon */}
                   <div
-                    className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
+                    className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300`}
                   >
-                    <service.icon className="w-7 h-7 text-white" />
+                    <service.icon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
                   </div>
 
                   {/* Content */}
-                  <h3 className="text-xl font-bold mb-3 group-hover:text-ksd-orange transition-colors">
+                  <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 group-hover:text-ksd-orange transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-foreground-secondary text-sm leading-relaxed mb-4">
+                  <p className="text-foreground-secondary text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4">
                     {service.description}
                   </p>
 

@@ -40,7 +40,7 @@ export function Testimonials() {
   };
 
   return (
-    <section className="py-24 bg-ksd-blue dark:bg-ksd-blue-dark overflow-hidden">
+    <section className="py-16 sm:py-24 bg-ksd-blue dark:bg-ksd-blue-dark overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -48,12 +48,12 @@ export function Testimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-3xl mx-auto mb-10 sm:mb-16 px-2"
         >
           <span className="text-ksd-orange font-semibold text-sm uppercase tracking-wider">
             Témoignages
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-4 text-white">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mt-3 sm:mt-4 text-white">
             Ce que disent nos{" "}
             <span className="text-ksd-orange">clients</span>
           </h2>
@@ -68,26 +68,26 @@ export function Testimonials() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
               transition={{ duration: 0.3 }}
-              className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 md:p-12"
+              className="bg-white/10 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12"
             >
               {/* Quote Icon */}
-              <Quote className="w-12 h-12 text-ksd-orange mb-6" />
+              <Quote className="w-8 h-8 sm:w-12 sm:h-12 text-ksd-orange mb-4 sm:mb-6" />
 
               {/* Content */}
-              <p className="text-xl md:text-2xl text-white leading-relaxed mb-8">
+              <p className="text-base sm:text-xl md:text-2xl text-white leading-relaxed mb-6 sm:mb-8">
                 &ldquo;{testimonials[current].content}&rdquo;
               </p>
 
               {/* Author */}
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-full bg-ksd-orange flex items-center justify-center text-white font-bold text-lg">
+              <div className="flex items-center gap-3 sm:gap-4">
+                <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-ksd-orange flex items-center justify-center text-white font-bold text-sm sm:text-lg">
                   {testimonials[current].avatar}
                 </div>
                 <div>
-                  <div className="text-white font-semibold text-lg">
+                  <div className="text-white font-semibold text-base sm:text-lg">
                     {testimonials[current].author}
                   </div>
-                  <div className="text-white/70 text-sm">
+                  <div className="text-white/70 text-xs sm:text-sm">
                     {testimonials[current].role}
                   </div>
                 </div>
@@ -96,13 +96,13 @@ export function Testimonials() {
           </AnimatePresence>
 
           {/* Navigation */}
-          <div className="flex items-center justify-center gap-4 mt-8">
+          <div className="flex items-center justify-center gap-3 sm:gap-4 mt-6 sm:mt-8">
             <button
               onClick={prev}
-              className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
               aria-label="Précédent"
             >
-              <ChevronLeft className="w-6 h-6" />
+              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
 
             {/* Dots */}
@@ -123,10 +123,10 @@ export function Testimonials() {
 
             <button
               onClick={next}
-              className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
               aria-label="Suivant"
             >
-              <ChevronRight className="w-6 h-6" />
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
           </div>
         </div>

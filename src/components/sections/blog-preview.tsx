@@ -39,20 +39,12 @@ export function BlogPreview() {
     fetchArticles();
   }, []);
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("fr-FR", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-    });
-  };
-
   if (!loading && articles.length === 0) {
     return null;
   }
 
   return (
-    <section className="py-24 bg-background">
+    <section className="py-16 sm:py-24 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -60,13 +52,13 @@ export function BlogPreview() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12"
+          className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 sm:gap-6 mb-8 sm:mb-12"
         >
           <div>
             <span className="text-ksd-orange font-semibold text-sm uppercase tracking-wider">
               Notre Blog
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mt-3 sm:mt-4">
               Actualités &{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-ksd-blue to-ksd-orange">
                 conseils
@@ -82,7 +74,7 @@ export function BlogPreview() {
         </motion.div>
 
         {/* Articles Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {loading
             ? Array.from({ length: 3 }).map((_, index) => (
                 <motion.div
@@ -129,16 +121,16 @@ export function BlogPreview() {
                       </div>
 
                       {/* Content */}
-                      <div className="p-6">
-                        <h3 className="text-lg font-bold mb-3 group-hover:text-ksd-orange transition-colors line-clamp-2">
+                      <div className="p-4 sm:p-6">
+                        <h3 className="text-base sm:text-lg font-bold mb-2 sm:mb-3 group-hover:text-ksd-orange transition-colors line-clamp-2">
                           {article.title}
                         </h3>
-                        <p className="text-foreground-secondary text-sm mb-4 line-clamp-2">
+                        <p className="text-foreground-secondary text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-2">
                           {article.excerpt}
                         </p>
 
                         {/* Meta */}
-                        <div className="flex items-center gap-4 text-xs text-foreground-secondary">
+                        <div className="flex items-center gap-3 sm:gap-4 text-xs text-foreground-secondary">
                           <div className="flex items-center gap-1">
                             <User className="w-3.5 h-3.5" />
                             <span>{article.author}</span>
