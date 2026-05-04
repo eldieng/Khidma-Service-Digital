@@ -91,7 +91,7 @@ export const defaultMetadata: Metadata = {
       "Agence de communication digitale à Dakar et Louga. Création de sites web, marketing digital et design graphique.",
     images: [
       {
-        url: `${baseUrl}/images/og-image.png`,
+        url: `${baseUrl}/opengraph-image`,
         width: 1200,
         height: 630,
         alt: "KSD - Khidma Service Digital - Agence Digitale au Sénégal",
@@ -102,7 +102,7 @@ export const defaultMetadata: Metadata = {
     card: "summary_large_image",
     title: "KSD - Khidma Service Digital | Agence Digitale Sénégal",
     description: "Création de sites web, marketing digital et design graphique à Dakar et Louga",
-    images: [`${baseUrl}/images/og-image.png`],
+    images: [`${baseUrl}/opengraph-image`],
   },
   robots: {
     index: true,
