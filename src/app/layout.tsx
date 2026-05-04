@@ -17,22 +17,32 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://khidmaservices.com"),
   title: {
     default: "KSD - Khidma Service Digital | Agence Digitale au Sénégal",
-    template: "%s | KSD",
+    template: "%s | KSD - Agence Digitale Sénégal",
   },
   description:
-    "Agence de communication digitale basée au Sénégal. Développement web, design, marketing digital et transformation numérique pour entreprises et startups.",
+    "Agence de communication digitale à Dakar et Louga. Création de sites web, applications, marketing digital, community management et design graphique pour entreprises au Sénégal et en Afrique.",
   keywords: [
-    "agence digitale",
-    "Sénégal",
-    "Dakar",
-    "développement web",
-    "communication digitale",
-    "marketing digital",
-    "design",
+    "agence digitale Sénégal",
+    "agence web Dakar",
+    "création site web Sénégal",
+    "développement web Dakar",
+    "communication digitale Sénégal",
+    "marketing digital Dakar",
+    "community management Sénégal",
+    "design graphique Dakar",
+    "agence communication Louga",
+    "application web Sénégal",
+    "e-commerce Dakar",
+    "SEO Sénégal",
+    "transformation digitale Afrique",
+    "social media Sénégal",
   ],
-  authors: [{ name: "Khidma Service Digital" }],
+  authors: [{ name: "Khidma Service Digital", url: "https://khidmaservices.com" }],
+  creator: "Khidma Service Digital",
+  publisher: "Khidma Service Digital",
   icons: {
     icon: "/images/Favicon_khidma_services.png",
     shortcut: "/images/Favicon_khidma_services.png",
@@ -45,18 +55,35 @@ export const metadata: Metadata = {
     siteName: "KSD - Khidma Service Digital",
     title: "KSD - Khidma Service Digital | Agence Digitale au Sénégal",
     description:
-      "Agence de communication digitale basée au Sénégal. Développement web, design, marketing digital.",
-    images: ["/logo.png"],
+      "Agence de communication digitale à Dakar et Louga. Création de sites web, marketing digital et design graphique.",
+    images: [
+      {
+        url: "/images/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "KSD - Khidma Service Digital - Agence Digitale au Sénégal",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "KSD - Khidma Service Digital",
-    description: "Agence de communication digitale au Sénégal",
-    images: ["/logo.png"],
+    title: "KSD - Khidma Service Digital | Agence Digitale Sénégal",
+    description: "Création de sites web, marketing digital et design graphique à Dakar et Louga",
+    images: ["/images/og-image.png"],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: "https://khidmaservices.com",
   },
 };
 

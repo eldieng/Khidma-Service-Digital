@@ -4,14 +4,19 @@ import prisma from "@/lib/prisma";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://khidmaservices.com";
 
+  // Pages statiques principales
   const staticPages = [
-    "",
-    "/a-propos",
-    "/services",
-    "/realisations",
-    "/blog",
-    "/faq",
-    "/contact",
+    { path: "", priority: 1.0, changeFreq: "weekly" as const },
+    { path: "/a-propos", priority: 0.8, changeFreq: "monthly" as const },
+    { path: "/services", priority: 0.9, changeFreq: "weekly" as const },
+    { path: "/realisations", priority: 0.8, changeFreq: "weekly" as const },
+    { path: "/blog", priority: 0.8, changeFreq: "daily" as const },
+    { path: "/faq", priority: 0.7, changeFreq: "monthly" as const },
+    { path: "/contact", priority: 0.8, changeFreq: "monthly" as const },
+    { path: "/demande-devis", priority: 0.9, changeFreq: "monthly" as const },
+    { path: "/mentions-legales", priority: 0.3, changeFreq: "yearly" as const },
+    { path: "/politique-confidentialite", priority: 0.3, changeFreq: "yearly" as const },
+    { path: "/cgu", priority: 0.3, changeFreq: "yearly" as const },
   ];
 
   const [services, projects, articles] = await Promise.all([
@@ -29,11 +34,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }),
   ]);
 
-  const staticRoutes = staticPages.map((route) => ({
-    url: `${baseUrl}${route}`,
+  const staticRoutes = staticPages.map((page) => ({
+    url: `${baseUrl}${page.path}`,
     lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: route === "" ? 1 : 0.8,
+    changeFrequency: page.changeFreq,
+    priority: page.priority,
   }));
 
   const serviceRoutes = services.map((slug) => ({
