@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
 
 const footerLinks = {
@@ -36,9 +37,13 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-6">
             <Link href="/" className="inline-block">
-              <span className="text-3xl font-bold">
-                KSD<span className="text-ksd-orange">.</span>
-              </span>
+              <Image
+                src="/images/logo_khidma_services.png"
+                alt="KSD - Khidma Service Digital"
+                width={120}
+                height={120}
+                className="object-contain"
+              />
             </Link>
             <p className="text-gray-300 text-sm leading-relaxed">
               Khidma Service Digital - Votre partenaire pour une transformation

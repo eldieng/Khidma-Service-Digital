@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { 
   LayoutDashboard, 
@@ -48,12 +49,21 @@ export default function AdminLayout({
       <aside className={`fixed top-0 left-0 z-50 h-full w-64 bg-white dark:bg-gray-800 shadow-xl transform transition-transform duration-300 lg:translate-x-0 ${
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}>
-        <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200 dark:border-gray-700">
+        <div className="flex items-center justify-between h-20 px-4 border-b border-gray-200 dark:border-gray-700">
           <Link href="/admin" className="flex items-center gap-2">
-            <span className="text-2xl font-bold text-ksd-blue dark:text-white">
-              KSD<span className="text-ksd-orange">.</span>
-            </span>
-            <span className="text-xs bg-ksd-orange text-white px-2 py-0.5 rounded">Admin</span>
+            <Image
+              src="/images/logo_khidma_services.png"
+              alt="KSD"
+              width={50}
+              height={50}
+              className="object-contain"
+            />
+            <div className="flex flex-col">
+              <span className="text-sm font-bold text-ksd-blue dark:text-white leading-tight">
+                KSD<span className="text-ksd-orange">.</span>
+              </span>
+              <span className="text-[10px] bg-ksd-orange text-white px-1.5 py-0.5 rounded text-center">Admin</span>
+            </div>
           </Link>
           <button 
             onClick={() => setSidebarOpen(false)}
