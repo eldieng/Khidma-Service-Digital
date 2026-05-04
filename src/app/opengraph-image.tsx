@@ -49,33 +49,17 @@ export default async function Image() {
             padding: "40px",
           }}
         >
-          {/* Logo Text */}
-          <div
+          {/* Logo Image */}
+          <img
+            src="https://khidmaservices.com/images/logo_khidma_services.png"
+            alt="KSD Logo"
+            width={200}
+            height={200}
             style={{
-              display: "flex",
-              alignItems: "center",
-              marginBottom: "30px",
+              marginBottom: "20px",
+              objectFit: "contain",
             }}
-          >
-            <span
-              style={{
-                fontSize: "80px",
-                fontWeight: "bold",
-                color: "white",
-              }}
-            >
-              KSD
-            </span>
-            <span
-              style={{
-                fontSize: "80px",
-                fontWeight: "bold",
-                color: "#F97316",
-              }}
-            >
-              .
-            </span>
-          </div>
+          />
 
           {/* Title */}
           <div
