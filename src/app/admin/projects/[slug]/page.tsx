@@ -24,6 +24,21 @@ interface ProjectData {
   projectStatus: string;
   order: number;
   isFeatured: boolean;
+  technologies: string[];
+  challenges: string[];
+  solutions: string[];
+  results: string[];
+}
+
+function toLines(items: string[]) {
+  return items.join("\n");
+}
+
+function toArrayFromLines(value: string) {
+  return value
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
 }
 
 export default function EditProjectPage() {
@@ -41,7 +56,29 @@ export default function EditProjectPage() {
         const res = await fetch(`/api/projects/${slug}`);
         if (res.ok) {
           const data = await res.json();
-          setFormData(data);
+          setFormData({
+            ...data,
+            technologies: Array.isArray(data.technologies)
+              ? data.technologies.map((item: { name?: string } | string) =>
+                  typeof item === "string" ? item : (item.name ?? "")
+                ).filter(Boolean)
+              : [],
+            challenges: Array.isArray(data.challenges)
+              ? data.challenges.map((item: { text?: string } | string) =>
+                  typeof item === "string" ? item : (item.text ?? "")
+                ).filter(Boolean)
+              : [],
+            solutions: Array.isArray(data.solutions)
+              ? data.solutions.map((item: { text?: string } | string) =>
+                  typeof item === "string" ? item : (item.text ?? "")
+                ).filter(Boolean)
+              : [],
+            results: Array.isArray(data.results)
+              ? data.results.map((item: { text?: string } | string) =>
+                  typeof item === "string" ? item : (item.text ?? "")
+                ).filter(Boolean)
+              : [],
+          });
         } else {
           router.push("/admin/projects");
         }
@@ -151,6 +188,47 @@ export default function EditProjectPage() {
               className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
             />
           </div>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-2">Technologies (une par ligne)</label>
+          <textarea
+            rows={4}
+            value={toLines(formData.technologies)}
+            onChange={(e) => setFormData({ ...formData, technologies: toArrayFromLines(e.target.value) })}
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+            placeholder={"Next.js\nTypeScript\nPostgreSQL"}
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-2">Defis rencontres (un par ligne)</label>
+          <textarea
+            rows={4}
+            value={toLines(formData.challenges)}
+            onChange={(e) => setFormData({ ...formData, challenges: toArrayFromLines(e.target.value) })}
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-2">Solutions apportees (une par ligne)</label>
+          <textarea
+            rows={4}
+            value={toLines(formData.solutions)}
+            onChange={(e) => setFormData({ ...formData, solutions: toArrayFromLines(e.target.value) })}
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-2">Resultats obtenus (un par ligne)</label>
+          <textarea
+            rows={4}
+            value={toLines(formData.results)}
+            onChange={(e) => setFormData({ ...formData, results: toArrayFromLines(e.target.value) })}
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+          />
         </div>
 
         <div>

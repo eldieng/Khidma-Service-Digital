@@ -23,10 +23,21 @@ export default function NewProjectPage() {
     liveUrl: "",
     repositoryUrl: "",
     projectStatus: "live",
+    technologies: [] as string[],
+    challenges: [] as string[],
+    solutions: [] as string[],
+    results: [] as string[],
     image: "/images/placeholder.jpg",
     order: 0,
     isFeatured: false,
   });
+
+  const toLines = (items: string[]) => items.join("\n");
+  const toArrayFromLines = (value: string) =>
+    value
+      .split("\n")
+      .map((line) => line.trim())
+      .filter(Boolean);
 
   const generateSlug = (title: string) => {
     return title
@@ -111,6 +122,47 @@ export default function NewProjectPage() {
               placeholder="Ex: Site Web, Application..."
             />
           </div>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-2">Technologies (une par ligne)</label>
+          <textarea
+            rows={4}
+            value={toLines(formData.technologies)}
+            onChange={(e) => setFormData({ ...formData, technologies: toArrayFromLines(e.target.value) })}
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+            placeholder={"Next.js\nTypeScript\nPostgreSQL"}
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-2">Defis rencontres (un par ligne)</label>
+          <textarea
+            rows={4}
+            value={toLines(formData.challenges)}
+            onChange={(e) => setFormData({ ...formData, challenges: toArrayFromLines(e.target.value) })}
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-2">Solutions apportees (une par ligne)</label>
+          <textarea
+            rows={4}
+            value={toLines(formData.solutions)}
+            onChange={(e) => setFormData({ ...formData, solutions: toArrayFromLines(e.target.value) })}
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-2">Resultats obtenus (un par ligne)</label>
+          <textarea
+            rows={4}
+            value={toLines(formData.results)}
+            onChange={(e) => setFormData({ ...formData, results: toArrayFromLines(e.target.value) })}
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+          />
         </div>
 
         <div>
