@@ -7,7 +7,7 @@ import prisma from "@/lib/prisma";
 import { generatePageMetadata } from "@/lib/metadata";
 import type { Metadata } from "next";
 
-export const revalidate = 300;
+export const revalidate = 0;
 
 export async function generateStaticParams() {
   const projects = await prisma.project.findMany({

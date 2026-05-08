@@ -6,7 +6,7 @@ import { generatePageMetadata } from "@/lib/metadata";
 import { ProjectsFilter } from "@/components/realisations/projects-filter";
 import type { Metadata } from "next";
 
-export const revalidate = 300;
+export const revalidate = 0;
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Réalisations web et études de cas clients",

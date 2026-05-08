@@ -5,7 +5,7 @@ import prisma from "@/lib/prisma";
 import { generatePageMetadata } from "@/lib/metadata";
 import type { Metadata } from "next";
 
-export const revalidate = 300;
+export const revalidate = 0;
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Blog - Conseils en digital, design et web",
