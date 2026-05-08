@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, ArrowLeft, CheckCircle, ExternalLink } from "lucide-react";
+import { ArrowRight, ArrowLeft, CheckCircle, ExternalLink, ShieldCheck, Clock3, Handshake } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import prisma from "@/lib/prisma";
 import { generatePageMetadata } from "@/lib/metadata";
@@ -74,6 +74,24 @@ export default async function ServiceDetailPage({
     notFound();
   }
 
+  const faqItems = [
+    {
+      question: `Combien de temps prend un projet de ${service.title.toLowerCase()} ?`,
+      answer:
+        "Le délai dépend du périmètre, mais nous validons toujours un planning clair en amont avec des jalons hebdomadaires.",
+    },
+    {
+      question: "Comment se déroule la collaboration avec KSD ?",
+      answer:
+        "Après un cadrage initial, nous avançons par étapes (validation, production, livraison) avec des points réguliers et des retours rapides.",
+    },
+    {
+      question: "Proposez-vous un accompagnement après livraison ?",
+      answer:
+        "Oui, nous proposons un suivi post-livraison pour optimiser les performances, corriger rapidement et faire évoluer votre solution.",
+    },
+  ];
+
   return (
     <>
       {/* Hero - Modern Full Width */}
@@ -139,6 +157,44 @@ export default async function ServiceDetailPage({
         </div>
       </section>
 
+      <section className="py-16 bg-background-secondary">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center mb-10">
+            <span className="inline-block px-4 py-2 bg-ksd-blue/10 text-ksd-blue dark:bg-ksd-orange/10 dark:text-ksd-orange rounded-full text-sm font-semibold mb-4">
+              Ce que vous obtenez
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Un accompagnement complet et concret</h2>
+            <p className="text-foreground-secondary">
+              Au-dela de la prestation technique, nous apportons un cadre de travail clair et oriente resultats.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="rounded-2xl border border-border bg-background p-6">
+              <ShieldCheck className="w-7 h-7 text-ksd-orange mb-3" />
+              <h3 className="text-lg font-bold mb-2">Qualite et fiabilite</h3>
+              <p className="text-sm text-foreground-secondary">
+                Livrables testes, structures et prets a l&apos;usage pour votre equipe.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-border bg-background p-6">
+              <Clock3 className="w-7 h-7 text-ksd-orange mb-3" />
+              <h3 className="text-lg font-bold mb-2">Delai maitrise</h3>
+              <p className="text-sm text-foreground-secondary">
+                Roadmap claire, priorisation des actions et suivi continu jusqu&apos;a la livraison.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-border bg-background p-6">
+              <Handshake className="w-7 h-7 text-ksd-orange mb-3" />
+              <h3 className="text-lg font-bold mb-2">Partenariat long terme</h3>
+              <p className="text-sm text-foreground-secondary">
+                Conseils strategiques, support post-livraison et amelioration continue de vos performances.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Benefits - Modern Cards */}
       <section className="py-24 bg-background relative">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(249,115,22,0.05),transparent_50%)]" />
@@ -168,6 +224,28 @@ export default async function ServiceDetailPage({
                 <p className="font-semibold text-lg">{benefit.text}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <span className="inline-block px-4 py-2 bg-ksd-orange/10 text-ksd-orange rounded-full text-sm font-semibold mb-4">
+                Questions frequentes
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">Tout ce qu&apos;il faut savoir avant de demarrer</h2>
+            </div>
+
+            <div className="space-y-4">
+              {faqItems.map((item) => (
+                <div key={item.question} className="rounded-2xl border border-border bg-background-secondary p-6">
+                  <h3 className="text-lg font-semibold mb-2">{item.question}</h3>
+                  <p className="text-foreground-secondary text-sm sm:text-base">{item.answer}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

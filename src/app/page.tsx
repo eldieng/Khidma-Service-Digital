@@ -1,6 +1,7 @@
 import { Hero } from "@/components/sections/hero";
 import { ServicesPreview } from "@/components/sections/services-preview";
 import { AboutPreview } from "@/components/sections/about-preview";
+import { AboutCtaBand } from "@/components/sections/about-cta-band";
 import { ProcessPreview } from "@/components/sections/process-preview";
 import { ProjectsPreview } from "@/components/sections/projects-preview";
 import { BlogPreview } from "@/components/sections/blog-preview";
@@ -22,6 +23,7 @@ export default function Home() {
       <Hero />
       <ServicesPreview />
       <AboutPreview />
+      <AboutCtaBand />
       <ProcessPreview />
       <ProjectsPreview />
       <BlogPreview />
