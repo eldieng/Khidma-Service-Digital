@@ -2,6 +2,26 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { requireAdmin } from "@/lib/auth";
 
+type MaybeTextItem = string | { name?: string; text?: string } | null | undefined;
+type MaybeGalleryItem = { url?: string; alt?: string } | string | null | undefined;
+
+function toText(value: MaybeTextItem): string {
+  if (typeof value === "string") return value;
+  if (value && typeof value === "object") return value.name ?? value.text ?? "";
+  return "";
+}
+
+function toGalleryItem(value: MaybeGalleryItem) {
+  if (!value) return null;
+  if (typeof value === "string") {
+    return value.trim() ? { url: value, alt: undefined } : null;
+  }
+  if (typeof value === "object" && typeof value.url === "string" && value.url.trim()) {
+    return { url: value.url, alt: value.alt };
+  }
+  return null;
+}
+
 // GET single project by slug
 export async function GET(
   request: NextRequest,
@@ -50,6 +70,13 @@ export async function PUT(
     const { slug } = await params;
     const body = await request.json();
     const { technologies, gallery, challenges, solutions, results, ...projectData } = body;
+    const normalizedTechnologies = Array.isArray(technologies) ? technologies.map(toText).filter(Boolean) : [];
+    const normalizedChallenges = Array.isArray(challenges) ? challenges.map(toText).filter(Boolean) : [];
+    const normalizedSolutions = Array.isArray(solutions) ? solutions.map(toText).filter(Boolean) : [];
+    const normalizedResults = Array.isArray(results) ? results.map(toText).filter(Boolean) : [];
+    const normalizedGallery = Array.isArray(gallery)
+      ? gallery.map(toGalleryItem).filter((item): item is { url: string; alt?: string } => Boolean(item))
+      : [];
 
     const existingProject = await prisma.project.findUnique({
       where: { slug },
@@ -74,19 +101,19 @@ export async function PUT(
       data: {
         ...projectData,
         technologies: {
-          create: technologies?.map((t: string, i: number) => ({ name: t, order: i })) || [],
+          create: normalizedTechnologies.map((t, i: number) => ({ name: t, order: i })),
         },
         gallery: {
-          create: gallery?.map((g: { url: string; alt?: string }, i: number) => ({ ...g, order: i })) || [],
+          create: normalizedGallery.map((g, i: number) => ({ ...g, order: i })),
         },
         challenges: {
-          create: challenges?.map((c: string, i: number) => ({ text: c, order: i })) || [],
+          create: normalizedChallenges.map((c, i: number) => ({ text: c, order: i })),
         },
         solutions: {
-          create: solutions?.map((s: string, i: number) => ({ text: s, order: i })) || [],
+          create: normalizedSolutions.map((s, i: number) => ({ text: s, order: i })),
         },
         results: {
-          create: results?.map((r: string, i: number) => ({ text: r, order: i })) || [],
+          create: normalizedResults.map((r, i: number) => ({ text: r, order: i })),
         },
       },
       include: {
