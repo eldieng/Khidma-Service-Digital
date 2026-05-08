@@ -4,6 +4,7 @@ import { requireAdmin } from "@/lib/auth";
 
 type MaybeTextItem = string | { name?: string; text?: string } | null | undefined;
 type MaybeGalleryItem = { url?: string; alt?: string } | string | null | undefined;
+type NormalizedGalleryItem = { url: string; alt: string | undefined };
 
 function toText(value: MaybeTextItem): string {
   if (typeof value === "string") return value;
@@ -20,6 +21,12 @@ function toGalleryItem(value: MaybeGalleryItem) {
     return { url: value.url, alt: value.alt };
   }
   return null;
+}
+
+function isNormalizedGalleryItem(
+  item: NormalizedGalleryItem | null
+): item is NormalizedGalleryItem {
+  return item !== null;
 }
 
 // GET single project by slug
@@ -75,7 +82,7 @@ export async function PUT(
     const normalizedSolutions = Array.isArray(solutions) ? solutions.map(toText).filter(Boolean) : [];
     const normalizedResults = Array.isArray(results) ? results.map(toText).filter(Boolean) : [];
     const normalizedGallery = Array.isArray(gallery)
-      ? gallery.map(toGalleryItem).filter((item): item is { url: string; alt?: string } => Boolean(item))
+      ? gallery.map(toGalleryItem).filter(isNormalizedGalleryItem)
       : [];
 
     const existingProject = await prisma.project.findUnique({
