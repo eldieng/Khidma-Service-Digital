@@ -65,11 +65,16 @@ model Project {
   slug            String   @unique
   title           String
   category        String
+  industry        String?
   description     String
   fullDescription String   @db.Text
   client          String
   date            String
+  duration        String?
   image           String
+  liveUrl         String?
+  repositoryUrl   String?
+  projectStatus   String   @default("live") // live, private, in_progress
   order           Int      @default(0)
   isActive        Boolean  @default(true)
   isFeatured      Boolean  @default(false)

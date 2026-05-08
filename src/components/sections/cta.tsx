@@ -35,14 +35,14 @@ export function CTA() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/contact">
+            <Link href="/demande-devis">
               <Button size="lg" className="group">
                 Demander un devis gratuit
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
             <a
-              href="https://wa.me/221770000000"
+              href="https://wa.me/221773675214"
               target="_blank"
               rel="noopener noreferrer"
             >

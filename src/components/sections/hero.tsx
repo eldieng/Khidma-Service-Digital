@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export function Hero() {
   return (
@@ -30,7 +31,7 @@ export function Hero() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-ksd-orange opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-ksd-orange"></span>
             </span>
-            Agence Digitale Premium au Sénégal
+            Agence digitale orientée résultats
           </motion.div>
 
           {/* Heading */}
@@ -43,7 +44,7 @@ export function Hero() {
             <span className="text-foreground">Transformez votre</span>
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-ksd-blue to-ksd-orange">
-              présence digitale
+              acquisition clients
             </span>
           </motion.h1>
 
@@ -54,9 +55,8 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-base sm:text-lg md:text-xl text-foreground-secondary max-w-2xl mx-auto mb-8 sm:mb-10 px-2"
           >
-            Nous accompagnons les entreprises sénégalaises et africaines dans
-            leur transformation numérique avec des solutions web innovantes et
-            un design premium.
+            De la stratégie à la mise en ligne, KSD conçoit des expériences digitales
+            qui améliorent votre visibilité, votre crédibilité et vos conversions.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -66,14 +66,18 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Button size="lg" className="group">
-              Démarrer un projet
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button size="lg" variant="outline" className="group">
-              <Play className="w-5 h-5" />
-              Voir nos réalisations
-            </Button>
+            <Link href="/demande-devis">
+              <Button size="lg" className="group">
+                Démarrer un projet
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+            <Link href="/realisations">
+              <Button size="lg" variant="outline" className="group">
+                <Play className="w-5 h-5" />
+                Voir nos réalisations
+              </Button>
+            </Link>
           </motion.div>
 
           {/* Stats */}
@@ -86,8 +90,8 @@ export function Hero() {
             {[
               { value: "50+", label: "Projets réalisés" },
               { value: "30+", label: "Clients satisfaits" },
-              { value: "5+", label: "Années d'expérience" },
-              { value: "100%", label: "Engagement qualité" },
+              { value: "5+", label: "Années d'expertise" },
+              { value: "<24h", label: "Délai de réponse" },
             ].map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-ksd-orange mb-1 sm:mb-2">

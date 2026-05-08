@@ -9,7 +9,7 @@ const services = [
     icon: Megaphone,
     title: "Communication Digitale",
     description:
-      "Stratégie social media, création de contenu, community management et campagnes publicitaires pour booster votre visibilité.",
+      "Stratégie social media, contenus performants et campagnes d'acquisition pour générer plus de prospects qualifiés.",
     href: "/services/communication-digitale",
     color: "from-orange-500 to-red-500",
   },
@@ -17,7 +17,7 @@ const services = [
     icon: Globe,
     title: "Développement Web",
     description:
-      "Sites vitrines, e-commerce, applications web sur mesure avec les technologies les plus modernes et performantes.",
+      "Sites vitrines, e-commerce et applications métiers conçus pour convertir, sécurisés et faciles à administrer.",
     href: "/services/developpement-web",
     color: "from-blue-500 to-cyan-500",
   },
@@ -25,7 +25,7 @@ const services = [
     icon: Palette,
     title: "Design Graphique",
     description:
-      "Identité visuelle, logos, supports print et digitaux pour une image de marque cohérente et impactante.",
+      "Identité visuelle, UX/UI et supports de marque cohérents pour renforcer votre crédibilité.",
     href: "/services/web-design",
     color: "from-purple-500 to-pink-500",
   },
@@ -33,7 +33,7 @@ const services = [
     icon: FileSpreadsheet,
     title: "Bureautique & Automatisation",
     description:
-      "Formation, automatisation des processus et solutions bureautiques pour optimiser votre productivité.",
+      "Automatisation des tâches répétitives, templates et outils collaboratifs pour gagner du temps au quotidien.",
     href: "/services/bureautique-automatisation",
     color: "from-green-500 to-emerald-500",
   },
@@ -80,8 +80,8 @@ export function ServicesPreview() {
             </span>
           </h2>
           <p className="text-foreground-secondary text-base sm:text-lg">
-            De la stratégie à l&apos;exécution, nous vous accompagnons dans tous
-            les aspects de votre transformation digitale.
+            Des offres pensées pour faire croître votre activité: visibilité,
+            acquisition, image de marque et performance opérationnelle.
           </p>
         </motion.div>
 

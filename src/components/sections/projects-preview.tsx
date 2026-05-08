@@ -14,6 +14,8 @@ interface ProjectPreviewData {
   category: string;
   description: string;
   image: string;
+  projectStatus?: string;
+  liveUrl?: string | null;
   technologies?: { id: string; name: string }[];
 }
 
@@ -53,11 +55,14 @@ export function ProjectsPreview() {
               Nos Réalisations
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mt-3 sm:mt-4">
-              Projets{" "}
+              Etudes de cas{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-ksd-blue to-ksd-orange">
-                récents
+                clients
               </span>
             </h2>
+            <p className="text-foreground-secondary mt-3 max-w-2xl">
+              Nous présentons des projets concrets avec contexte, solution et impact.
+            </p>
           </div>
           <Link href="/realisations">
             <Button variant="outline" className="group">
@@ -124,6 +129,25 @@ export function ProjectsPreview() {
                     <p className="text-foreground-secondary text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-2">
                       {project.description}
                     </p>
+
+                    <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                      <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${
+                        project.projectStatus === "live"
+                          ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+                          : project.projectStatus === "in_progress"
+                            ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400"
+                            : "bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-300"
+                      }`}>
+                        {project.projectStatus === "live"
+                          ? "En ligne"
+                          : project.projectStatus === "in_progress"
+                            ? "En cours"
+                            : "Privé"}
+                      </span>
+                      {project.liveUrl && (
+                        <span className="text-xs text-ksd-orange font-medium">Voir le site en détail</span>
+                      )}
+                    </div>
                     
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2">
@@ -135,6 +159,11 @@ export function ProjectsPreview() {
                           {tech.name}
                         </span>
                       ))}
+                    </div>
+
+                    <div className="mt-4 text-xs font-semibold text-ksd-orange flex items-center gap-1">
+                      Voir l&apos;étude de cas
+                      <ArrowRight className="w-3.5 h-3.5" />
                     </div>
                   </div>
                 </div>

@@ -9,9 +9,9 @@ import type { Metadata } from "next";
 export const revalidate = 300;
 
 export const metadata: Metadata = generatePageMetadata({
-  title: "Réalisations et projets clients",
+  title: "Réalisations web et études de cas clients",
   description:
-    "Explorez les projets KSD en développement web, design et transformation digitale réalisés pour nos clients au Sénégal et en Afrique.",
+    "Découvrez nos réalisations détaillées : contexte, objectifs, solutions et résultats business pour chaque projet digital livré par KSD.",
   path: "/realisations",
 });
 
@@ -34,12 +34,13 @@ export default async function RealisationsPage() {
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mt-4 mb-6">
               Nos{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-ksd-blue to-ksd-orange">
-                réalisations
+                études de cas
               </span>
             </h1>
             <p className="text-lg text-foreground-secondary max-w-3xl mx-auto">
-              Découvrez nos projets réalisés avec succès pour nos clients.
-              Sites web, applications, design et solutions digitales sur mesure.
+              Chaque projet présente le contexte client, les défis, les solutions
+              mises en œuvre et les résultats obtenus. Cliquez pour consulter les
+              détails et, quand disponible, le site en ligne.
             </p>
           </div>
         </div>
@@ -63,7 +64,7 @@ export default async function RealisationsPage() {
               Discutons de votre projet et voyons comment nous pouvons vous aider
               à atteindre vos objectifs.
             </p>
-            <Link href="/contact">
+            <Link href="/demande-devis">
               <Button size="lg" className="bg-white text-ksd-blue hover:bg-white/90">
                 Démarrer un projet
                 <ArrowRight className="w-5 h-5 ml-2" />

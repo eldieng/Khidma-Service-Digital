@@ -17,6 +17,8 @@ interface Project {
   title: string;
   slug: string;
   description: string;
+  projectStatus?: string;
+  liveUrl?: string | null;
   image: string;
   category: string;
   technologies: Technology[];
@@ -117,6 +119,25 @@ export function ProjectsFilter({ projects }: ProjectsFilterProps) {
                     <p className="text-foreground-secondary text-sm mb-4 line-clamp-2">
                       {project.description}
                     </p>
+
+                    <div className="flex items-center gap-2 mb-4">
+                      <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${
+                        project.projectStatus === "live"
+                          ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+                          : project.projectStatus === "in_progress"
+                            ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400"
+                            : "bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-300"
+                      }`}>
+                        {project.projectStatus === "live"
+                          ? "Site en ligne"
+                          : project.projectStatus === "in_progress"
+                            ? "Projet en cours"
+                            : "Accès privé"}
+                      </span>
+                      {project.liveUrl && (
+                        <span className="text-xs text-ksd-orange font-medium">Lien disponible</span>
+                      )}
+                    </div>
 
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2">

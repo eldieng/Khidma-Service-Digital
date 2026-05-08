@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, ArrowLeft, CheckCircle } from "lucide-react";
+import { ArrowRight, ArrowLeft, CheckCircle, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import prisma from "@/lib/prisma";
 import { generatePageMetadata } from "@/lib/metadata";
@@ -33,8 +33,8 @@ export async function generateMetadata({
   }
 
   return generatePageMetadata({
-    title: service.title,
-    description: service.description,
+    title: `${service.title} - service digital`,
+    description: `${service.description} Découvrez la méthodologie, les livrables et les bénéfices pour votre activité.`,
     path: `/services/${service.slug}`,
     image: service.image,
   });
@@ -46,14 +46,29 @@ export default async function ServiceDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const service = await prisma.service.findUnique({
-    where: { slug },
-    include: {
-      benefits: { orderBy: { order: "asc" } },
-      subServices: { orderBy: { order: "asc" } },
-      processSteps: { orderBy: { step: "asc" } },
-    },
-  });
+  const [service, relatedProjects] = await Promise.all([
+    prisma.service.findUnique({
+      where: { slug },
+      include: {
+        benefits: { orderBy: { order: "asc" } },
+        subServices: { orderBy: { order: "asc" } },
+        processSteps: { orderBy: { step: "asc" } },
+      },
+    }),
+    prisma.project.findMany({
+      where: { isActive: true },
+      take: 3,
+      orderBy: { order: "asc" },
+      select: {
+        id: true,
+        slug: true,
+        title: true,
+        description: true,
+        image: true,
+        liveUrl: true,
+      },
+    }),
+  ]);
 
   if (!service || !service.isActive) {
     notFound();
@@ -101,7 +116,7 @@ export default async function ServiceDetailPage({
                 {service.longDescription}
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link href="/contact">
+                <Link href="/demande-devis">
                   <Button size="lg" className="group text-base px-8">
                     Demander un devis gratuit
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -156,6 +171,37 @@ export default async function ServiceDetailPage({
           </div>
         </div>
       </section>
+
+      {relatedProjects.length > 0 && (
+        <section className="py-16 bg-background-secondary">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mb-10">
+              <span className="text-ksd-orange font-semibold text-sm uppercase tracking-wider">Références</span>
+              <h2 className="text-3xl sm:text-4xl font-bold mt-3 mb-3">Projets associés</h2>
+              <p className="text-foreground-secondary">
+                Découvrez comment cette expertise se traduit dans des projets livrés pour nos clients.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6">
+              {relatedProjects.map((project) => (
+                <Link key={project.id} href={`/realisations/${project.slug}`} className="group rounded-2xl border border-border bg-background overflow-hidden">
+                  <div className="relative aspect-[16/10]">
+                    <Image src={project.image} alt={project.title} fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
+                  </div>
+                  <div className="p-5">
+                    <h3 className="font-bold text-lg mb-2 group-hover:text-ksd-orange transition-colors">{project.title}</h3>
+                    <p className="text-sm text-foreground-secondary line-clamp-2 mb-3">{project.description}</p>
+                    <div className="text-xs font-semibold text-ksd-orange flex items-center gap-1">
+                      Voir l&apos;étude de cas
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Sub-services - Bento Grid Style */}
       <section className="py-24 bg-ksd-blue dark:bg-ksd-blue-dark relative overflow-hidden">
@@ -271,9 +317,9 @@ export default async function ServiceDetailPage({
               Contactez-nous pour discuter de vos besoins et obtenir un devis personnalisé.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
+              <Link href="/demande-devis">
                 <Button size="lg" className="bg-white text-ksd-blue hover:bg-white/90">
-                  Demander un devis
+                  Lancer mon projet
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
               </Link>

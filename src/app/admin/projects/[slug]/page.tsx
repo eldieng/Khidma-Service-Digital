@@ -12,11 +12,16 @@ interface ProjectData {
   slug: string;
   title: string;
   category: string;
+  industry: string | null;
   description: string;
   fullDescription: string;
   client: string;
   date: string;
+  duration: string | null;
   image: string;
+  liveUrl: string | null;
+  repositoryUrl: string | null;
+  projectStatus: string;
   order: number;
   isFeatured: boolean;
 }
@@ -149,6 +154,16 @@ export default function EditProjectPage() {
         </div>
 
         <div>
+          <label className="block text-sm font-medium mb-2">Secteur</label>
+          <input
+            type="text"
+            value={formData.industry || ""}
+            onChange={(e) => setFormData({ ...formData, industry: e.target.value })}
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+          />
+        </div>
+
+        <div>
           <label className="block text-sm font-medium mb-2">Description courte *</label>
           <textarea
             required
@@ -187,6 +202,51 @@ export default function EditProjectPage() {
               type="text"
               value={formData.date}
               onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-2">Durée du projet</label>
+            <input
+              type="text"
+              value={formData.duration || ""}
+              onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-2">Statut projet</label>
+            <select
+              value={formData.projectStatus}
+              onChange={(e) => setFormData({ ...formData, projectStatus: e.target.value })}
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+            >
+              <option value="live">En ligne</option>
+              <option value="in_progress">En cours</option>
+              <option value="private">Privé</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-2">URL du site</label>
+            <input
+              type="url"
+              value={formData.liveUrl || ""}
+              onChange={(e) => setFormData({ ...formData, liveUrl: e.target.value })}
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-2">URL du repository</label>
+            <input
+              type="url"
+              value={formData.repositoryUrl || ""}
+              onChange={(e) => setFormData({ ...formData, repositoryUrl: e.target.value })}
               className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
             />
           </div>

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, Calendar, Building2, Layers } from "lucide-react";
+import { ArrowLeft, ArrowRight, Calendar, Building2, Layers, ExternalLink, Github, Clock3, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import prisma from "@/lib/prisma";
 import { generatePageMetadata } from "@/lib/metadata";
@@ -34,7 +34,7 @@ export async function generateMetadata({
 
   return generatePageMetadata({
     title: project.title,
-    description: project.description,
+    description: `${project.description} - ${project.client}`,
     path: `/realisations/${project.slug}`,
     image: project.image,
   });
@@ -128,6 +128,17 @@ export default async function ProjectDetailPage({
                   <p className="text-white font-medium">{project.technologies.length} outils</p>
                 </div>
               </div>
+              {project.duration && (
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-sm flex items-center justify-center">
+                    <Clock3 className="w-5 h-5 text-ksd-orange" />
+                  </div>
+                  <div>
+                    <p className="text-white/50 text-sm">Durée</p>
+                    <p className="text-white font-medium">{project.duration}</p>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Tech Stack */}
@@ -140,6 +151,26 @@ export default async function ProjectDetailPage({
                   {tech.name}
                 </span>
               ))}
+            </div>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              {project.liveUrl && (
+                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                  <Button size="lg" className="gap-2">
+                    <Globe className="w-4 h-4" />
+                    Voir le site en ligne
+                    <ExternalLink className="w-4 h-4" />
+                  </Button>
+                </a>
+              )}
+              {project.repositoryUrl && (
+                <a href={project.repositoryUrl} target="_blank" rel="noopener noreferrer">
+                  <Button size="lg" variant="outline" className="gap-2 border-white/30 text-white hover:bg-white/10">
+                    <Github className="w-4 h-4" />
+                    Voir le repository
+                  </Button>
+                </a>
+              )}
             </div>
           </div>
         </div>
@@ -154,6 +185,27 @@ export default async function ProjectDetailPage({
       {/* Challenges & Solutions - Modern Split Design */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto mb-14 p-6 rounded-3xl border border-border bg-background-secondary">
+            <h2 className="text-2xl font-bold mb-3">Contexte du projet</h2>
+            <p className="text-foreground-secondary mb-4">{project.description}</p>
+            <div className="grid sm:grid-cols-3 gap-4 text-sm">
+              <div className="rounded-xl bg-background p-4">
+                <p className="text-foreground-secondary mb-1">Client</p>
+                <p className="font-semibold">{project.client}</p>
+              </div>
+              <div className="rounded-xl bg-background p-4">
+                <p className="text-foreground-secondary mb-1">Catégorie</p>
+                <p className="font-semibold">{project.category}</p>
+              </div>
+              <div className="rounded-xl bg-background p-4">
+                <p className="text-foreground-secondary mb-1">Statut</p>
+                <p className="font-semibold">
+                  {project.projectStatus === "live" ? "Site en ligne" : project.projectStatus === "in_progress" ? "Projet en cours" : "Projet privé"}
+                </p>
+              </div>
+            </div>
+          </div>
+
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="inline-block px-4 py-2 bg-ksd-orange/10 text-ksd-orange rounded-full text-sm font-semibold mb-4">
               Étude de cas
@@ -242,10 +294,11 @@ export default async function ProjectDetailPage({
               Vous avez un projet similaire ?
             </h2>
             <p className="text-foreground-secondary mb-8">
-              Discutons de votre projet et voyons comment nous pouvons vous aider.
+              Discutons de votre besoin et construisons une solution qui génère les
+              mêmes résultats pour votre activité.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
+              <Link href="/demande-devis">
                 <Button size="lg" className="group">
                   Démarrer un projet
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
