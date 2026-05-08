@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { User, Mail, Phone, Building, Camera, Save, LogOut, FileText } from "lucide-react";
@@ -42,18 +42,7 @@ export default function ProfilePage() {
     company: "",
   });
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (!storedUser) {
-      router.push("/connexion");
-      return;
-    }
-
-    const userData = JSON.parse(storedUser);
-    fetchUserData(userData.id);
-  }, [router]);
-
-  async function fetchUserData(id: string) {
+  const fetchUserData = useCallback(async (id: string) => {
     try {
       const res = await fetch(`/api/users/${id}`);
       if (!res.ok) {
@@ -77,7 +66,18 @@ export default function ProfilePage() {
     } finally {
       setLoading(false);
     }
-  }
+  }, [router]);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (!storedUser) {
+      router.push("/connexion");
+      return;
+    }
+
+    const userData = JSON.parse(storedUser);
+    fetchUserData(userData.id);
+  }, [router, fetchUserData]);
 
   async function handleSave() {
     if (!user) return;
@@ -103,9 +103,15 @@ export default function ProfilePage() {
     }
   }
 
-  function handleLogout() {
-    localStorage.removeItem("user");
-    router.push("/");
+  async function handleLogout() {
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+    } catch (error) {
+      console.error("Logout error:", error);
+    } finally {
+      localStorage.removeItem("user");
+      router.push("/");
+    }
   }
 
   if (loading) {
