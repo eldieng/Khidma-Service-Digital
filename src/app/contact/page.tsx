@@ -7,17 +7,11 @@ import { useState } from "react";
 
 const contactInfo = [
   {
-    location: "Louga",
-    address: "Sénégal",
-    email: "contact@khidmaservice.com",
-    phone: "(+221) 77 367 52 14",
-    color: "from-ksd-blue to-blue-600",
-  },
-  {
-    location: "Dakar",
+    location: "Dakar & Louga",
     address: "Sénégal",
     email: "contact@khidmaservice.com",
     phone: "(+221) 77 454 86 61",
+    phoneHref: "+221774548661",
     color: "from-ksd-orange to-orange-600",
   },
 ];
@@ -155,7 +149,7 @@ export default function ContactPage() {
                       {info.email}
                     </a>
                     <a
-                      href={`tel:${info.phone.replace(/\s/g, "")}`}
+                      href={`tel:${info.phoneHref}`}
                       className="flex items-center gap-3 text-foreground-secondary hover:text-ksd-orange transition-colors"
                     >
                       <Phone className="w-4 h-4" />
@@ -180,7 +174,7 @@ export default function ContactPage() {
 
               {/* WhatsApp */}
               <a
-                href="https://wa.me/221773675214"
+                href="https://wa.me/221774548661"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block"

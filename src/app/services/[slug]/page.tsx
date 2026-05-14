@@ -140,7 +140,7 @@ export default async function ServiceDetailPage({
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
-                <a href="https://wa.me/221773675214" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/221774548661" target="_blank" rel="noopener noreferrer">
                   <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 text-base px-8">
                     Discuter sur WhatsApp
                   </Button>

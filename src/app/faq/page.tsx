@@ -172,7 +172,7 @@ export default function FAQPage() {
                 </Button>
               </Link>
               <a
-                href="https://wa.me/221773675214"
+                href="https://wa.me/221774548661"
                 target="_blank"
                 rel="noopener noreferrer"
               >

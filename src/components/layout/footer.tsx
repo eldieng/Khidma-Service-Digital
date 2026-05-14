@@ -115,9 +115,6 @@ export function Footer() {
                   <a href="tel:+221774548661" className="hover:text-ksd-orange transition-colors block">
                     (+221) 77 454 86 61
                   </a>
-                  <a href="tel:+221773675214" className="hover:text-ksd-orange transition-colors block">
-                    (+221) 77 367 52 14
-                  </a>
                 </div>
               </li>
               <li className="flex items-center gap-3">

@@ -14,8 +14,8 @@ export default function AdminSettingsPage() {
     siteDescription: "Agence de communication digitale basée au Sénégal. Développement web, design, marketing digital.",
     email: "contact@khidmaservice.com",
     phoneDakar: "+221 77 454 86 61",
-    phoneLouga: "+221 77 367 52 14",
-    whatsapp: "+221 77 367 52 14",
+    phoneLouga: "+221 77 454 86 61",
+    whatsapp: "+221 77 454 86 61",
   });
 
   useEffect(() => {

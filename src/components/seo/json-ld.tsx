@@ -28,13 +28,6 @@ export function OrganizationJsonLd() {
         areaServed: "SN",
         availableLanguage: ["French"],
       },
-      {
-        "@type": "ContactPoint",
-        telephone: "+221-77-367-52-14",
-        contactType: "customer service",
-        areaServed: "SN",
-        availableLanguage: ["French"],
-      },
     ],
     email: "contact@khidmaservice.com",
     sameAs: [
