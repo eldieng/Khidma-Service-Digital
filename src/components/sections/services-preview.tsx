@@ -3,19 +3,36 @@ import Link from "next/link";
 import prisma from "@/lib/prisma";
 
 export async function ServicesPreview() {
-  const services = await prisma.service.findMany({
-    where: { isActive: true },
-    orderBy: { order: "asc" },
-    take: 4,
-    select: {
-      id: true,
-      slug: true,
-      title: true,
-      description: true,
-      icon: true,
-      color: true,
-    },
-  });
+  let services: {
+    id: string;
+    slug: string;
+    title: string;
+    description: string;
+    icon: string;
+    color: string;
+  }[] = [];
+
+  try {
+    services = await prisma.service.findMany({
+      where: { isActive: true },
+      orderBy: { order: "asc" },
+      take: 4,
+      select: {
+        id: true,
+        slug: true,
+        title: true,
+        description: true,
+        icon: true,
+        color: true,
+      },
+    });
+  } catch (error) {
+    console.error("Error fetching services preview:", error);
+  }
+
+  if (services.length === 0) {
+    return null;
+  }
 
   return (
     <section className="py-16 sm:py-24 bg-background-secondary">
